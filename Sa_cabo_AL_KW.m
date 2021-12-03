@@ -16,7 +16,6 @@ E=69000;     % Modulo de Elasticidade do Al (MPa)
 
 % Calculo de EI e pl
 EI=(n.*E.*pi.*d.^4)/64;
-pl=pl.*1000;
 
 % Calculo de K
 p=((tmed.*A)/EI).^(1/2);
