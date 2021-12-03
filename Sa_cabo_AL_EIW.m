@@ -3,7 +3,7 @@ function [ta, K, Kmax, EI] = Sa_cabo_AL_EIW(log_N, tmed, tult, pl, A, d, n)
 %
 % Na entrada, log_N é o número de ciclos em escala log10 desejado, tmed é 
 % a tensão média aplicada ao cabo (MPa), tult é a tensão ultima suportada 
-% pelo cabo (MPa), pl é o seu peso linear (kg/m), E é o modulo de 
+% pelo cabo (MPa), pl é o seu peso linear (kg/km), E é o modulo de 
 % elasticidade (GPa), A é a área total do cabo (mm^2), d é o diamentro do fio
 % (mm), e n é o número de fios do cabo e as saídas são ta o valor da amplitude
 % de tensão (MPa), K, Kmax e EI com o valor de rigidez a flexão (N*m^2)
@@ -13,11 +13,10 @@ maxciclos=8;     % Valor maximo de numero de ciclos 'lembrar que ciclos=log10(N)
 x= 89;           % ultimo ponto de contato (mm)
 pl_max=1500;     % peso linear maximo (kg/km)
 EI_max=31000000; % Rigidez a flexao máximo (MPa.*mm4)
-E=69000;            % Modulo de Elasticidade do Al (GPa)
+E=69000;         % Modulo de Elasticidade do Al (MPa)
 
 % Calculo de EI e pl
 EI=(n.*E.*pi.*d.^4)/64;
-pl=pl.*1000;
 
 % Calculo de K
 p=((tmed.*A)/EI).^(1/2);
@@ -44,7 +43,7 @@ if K>Kmax
     return;
 end
 if pl>pl_max
-    warndlg('O valor de pl deve ser inferior a 1500 Kg/m','Erro em pl');
+    warndlg('O valor de pl deve ser inferior a 1500 kg/km','Erro em pl');
 end
 if log_N>maxciclos
     warndlg('O valor de log(N) deve ser inferior a 8','Erro no log(N)');
